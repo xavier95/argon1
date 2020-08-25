@@ -18,6 +18,7 @@ argon_check_pkg() {
 }
 
 sudo apt-get update
+
 pkglist=(python-smbus python3-smbus i2c-tools wget)
 for curpkg in ${pkglist[@]}; do
 	sudo apt-get install -y $curpkg
