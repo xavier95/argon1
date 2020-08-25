@@ -61,6 +61,12 @@ fi
 
 dpkg -i /tmp/argon1/*
 
+exec=$(grep i2c_arm=on /boot/config.txt)
+if [ "0" != $? ]; then
+	mount -o remount,rw /boot
+	sed -i 's/dtparam=.*/&,i2c_arm=on/' /boot/config.txt
+fi
+
 daemonname="argononed"
 powerbuttonscript=/usr/bin/$daemonname.py
 shutdownscript="/lib/systemd/system-shutdown/"$daemonname"-poweroff.py"
@@ -511,4 +517,4 @@ else
 	echo Use 'argonone-config' to configure fan
 	echo Use 'argonone-uninstall' to uninstall
 fi
-echo
+echo Reboot your system
