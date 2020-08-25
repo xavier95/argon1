@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 argon_create_file() {
 	if [ -f $1 ]; then
         sudo rm $1
@@ -18,8 +17,7 @@ argon_check_pkg() {
     fi
 }
 
-
-pkglist=(raspi-gpio python-rpi.gpio python3-rpi.gpio python-smbus python3-smbus i2c-tools)
+pkglist=(python-smbus python3-smbus i2c-tools wget)
 for curpkg in ${pkglist[@]}; do
 	sudo apt-get install -y $curpkg
 	RESULT=$(argon_check_pkg "$curpkg")
@@ -32,6 +30,36 @@ for curpkg in ${pkglist[@]}; do
 	fi
 done
 
+mkdir /tmp/argon1
+wget -P /tmp/argon1 http://archive.raspberrypi.org/debian/pool/main/r/rpi.gpio/python-rpi.gpio_0.6.5~stretch-1_armhf.deb
+RESULT=$?
+if [ "0" != "$RESULT" ]
+then
+	echo "********************************************************************"
+	echo "Please also connect device to the internet and restart installation."
+	echo "********************************************************************"
+	exit
+fi
+wget -P /tmp/argon1 http://archive.raspberrypi.org/debian/pool/main/r/rpi.gpio/python3-rpi.gpio_0.6.5~stretch-1_armhf.deb
+RESULT=$?
+if [ "0" != "$RESULT" ]
+then
+	echo "********************************************************************"
+	echo "Please also connect device to the internet and restart installation."
+	echo "********************************************************************"
+	exit
+fi
+wget -P /tmp/argon1 http://archive.raspberrypi.org/debian/pool/main/r/raspi-gpio/raspi-gpio_0.20191001_armhf.deb
+RESULT=$?
+if [ "0" != "$RESULT" ]
+then
+	echo "********************************************************************"
+	echo "Please also connect device to the internet and restart installation."
+	echo "********************************************************************"
+	exit
+fi
+
+dpkg -i /tmp/argon1/*
 
 daemonname="argononed"
 powerbuttonscript=/usr/bin/$daemonname.py
