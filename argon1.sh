@@ -33,25 +33,7 @@ for curpkg in ${pkglist[@]}; do
 done
 
 mkdir /tmp/argon1
-wget -P /tmp/argon1 http://archive.raspberrypi.org/debian/pool/main/r/rpi.gpio/python-rpi.gpio_0.6.5~stretch-1_armhf.deb
-RESULT=$?
-if [ "0" != "$RESULT" ]
-then
-	echo "********************************************************************"
-	echo "Please also connect device to the internet and restart installation."
-	echo "********************************************************************"
-	exit
-fi
-wget -P /tmp/argon1 http://archive.raspberrypi.org/debian/pool/main/r/rpi.gpio/python3-rpi.gpio_0.6.5~stretch-1_armhf.deb
-RESULT=$?
-if [ "0" != "$RESULT" ]
-then
-	echo "********************************************************************"
-	echo "Please also connect device to the internet and restart installation."
-	echo "********************************************************************"
-	exit
-fi
-wget -P /tmp/argon1 http://archive.raspberrypi.org/debian/pool/main/r/raspi-gpio/raspi-gpio_0.20191001_armhf.deb
+wget -P /tmp/argon1 http://archive.raspberrypi.org/debian/pool/main/r/raspi-gpio/raspi-gpio_0.20191001_armhf.deb http://archive.raspberrypi.org/debian/pool/main/r/rpi.gpio/python3-rpi.gpio_0.6.5~stretch-1_armhf.deb http://archive.raspberrypi.org/debian/pool/main/r/rpi.gpio/python-rpi.gpio_0.6.5~stretch-1_armhf.deb http://archive.raspberrypi.org/debian/pool/main/r/rpi.gpio/python3-rpi.gpio_0.7.0-0.1~bpo10+1_armhf.deb http://archive.raspberrypi.org/debian/pool/main/r/rpi.gpio/rpi.gpio-common_0.7.0-0.1~bpo10+1_armhf.deb
 RESULT=$?
 if [ "0" != "$RESULT" ]
 then
